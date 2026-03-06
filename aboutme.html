@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的自我介紹</title>
+    <style>
+        /* 基本重置與字體設定 */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* 主要容器設定 */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 頭部與照片區塊 */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007BFF;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .title {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        /* 內容區塊 */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #007BFF;
+            border-left: 4px solid #007BFF;
+            padding-left: 10px;
+        }
+
+        /* 技能標籤 */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: #e9ecef;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #495057;
+        }
+
+        /* 聯絡方式 */
+        .contact-info {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* 手機版響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150" alt="我的照片" class="profile-img">
+            <h1>你的名字 (Your Name)</h1>
+            <p class="title">前端工程師 / 網頁設計師 / 學生</p>
+        </div>
+
+        <div class="section">
+            <h2>關於我</h2>
+            <p>你好！我是一位充滿熱情的[你的職業/身分]。我喜歡學習新事物，並且對[你的興趣或專業領域，例如：網頁開發、資料分析、設計]有著濃厚的興趣。在過去的幾年裡，我致力於提升自己的技能，並期望能為團隊帶來價值。平時我喜歡[你的休閒愛好，例如：看書、爬山、寫程式]。</p>
+        </div>
+
+        <div class="section">
+            <h2>專業技能</h2>
+            <div class="skills">
+                <span class="skill-tag">HTML / CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">UI/UX 設計</span>
+                <span class="skill-tag">專案管理</span>
+                <span class="skill-tag">溝通能力</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>經歷與學歷</h2>
+            <ul>
+                <li><strong>某某科技公司</strong> - 軟體工程師 (2021 - 至今)
+                    <p>負責維護公司主要產品前端介面，優化使用者體驗，並參與新功能的開發。</p>
+                </li>
+                <li><strong>某某大學</strong> - 資訊工程學系 學士 (2017 - 2021)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>聯絡我</h2>
+            <ul class="contact-info">
+                <li>📧 Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li>💼 LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></li>
+                <li>🐙 GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></li>
+                <li>📱 Phone: 0912-345-678</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
