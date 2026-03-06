@@ -2,16 +2,57 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人首頁</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    h1 { color: blue; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin-top: 50px; /* 讓內容稍微往下移一點，不要貼著頂部 */
+        }
+        h1 { 
+            color: #007BFF; /* 稍微換了一個比較現代的藍色 */
+        }
+        
+        /* 一般按鈕的樣式 */
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        button:hover {
+            background-color: #e2e6ea;
+        }
+
+        /* 導覽連結的樣式（讓它看起來像個按鈕） */
+        .nav-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s; /* 增加滑鼠移過去的漸變效果 */
+        }
+        .nav-link:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
         <button @click="changeMessage">點我改變訊息</button>
+        
+        <br>
+        
+        <a href="aboutme.html" class="nav-link">前往「關於我」頁面 👉</a>
     </div>
 
     <script>
@@ -20,12 +61,12 @@
         createApp({
             data() {
                 return {
-                    message: "Hello Vue!"
+                    message: "歡迎來到我的個人主頁！" // 修改成歡迎詞
                 };
             },
             methods: {
                 changeMessage() {
-                    this.message = "訊息已改變！";
+                    this.message = "這是一個結合 Vue 3 的簡單網頁！";
                 }
             }
         }).mount("#app");
