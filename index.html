@@ -3,56 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的個人首頁</title>
+    <title>首頁</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         body { 
-            font-family: Arial, sans-serif; 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
             text-align: center; 
-            margin-top: 50px; /* 讓內容稍微往下移一點，不要貼著頂部 */
+            margin: 0;
+            padding-top: 15vh; /* 使用視窗高度比例來推疊，讓內容垂直偏中 */
+            background-color: #f8f9fa;
+            color: #333;
         }
         h1 { 
-            color: #007BFF; /* 稍微換了一個比較現代的藍色 */
+            color: #2c3e50; 
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
         }
         
-        /* 一般按鈕的樣式 */
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f8f9fa;
-        }
-        button:hover {
-            background-color: #e2e6ea;
-        }
-
-        /* 導覽連結的樣式（讓它看起來像個按鈕） */
+        /* 導覽連結的樣式 */
         .nav-link {
             display: inline-block;
-            margin-top: 30px;
-            padding: 12px 24px;
+            padding: 12px 30px;
             background-color: #007BFF;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 30px; /* 改成圓角按鈕，看起來更現代 */
             font-weight: bold;
-            transition: background-color 0.3s; /* 增加滑鼠移過去的漸變效果 */
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
         }
         .nav-link:hover {
             background-color: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+            transform: translateY(-2px); /* 滑鼠懸停時會有微微浮起的動畫 */
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <h1>{{ message }}</h1>
-        <button @click="changeMessage">點我改變訊息</button>
+        <h1>{{ greeting }}</h1>
+        <p>歡迎來到我的專屬空間，這裡記錄了我的生活日常與專案。</p>
         
-        <br>
-        
-        <a href="aboutme.html" class="nav-link">前往「關於我」頁面 👉</a>
+        <a href="aboutme.html" class="nav-link">認識我更多 👉</a>
     </div>
 
     <script>
@@ -61,13 +59,9 @@
         createApp({
             data() {
                 return {
-                    message: "歡迎來到我的個人主頁！" // 修改成歡迎詞
+                    // 這裡可以隨時修改你想顯示的主標題
+                    greeting: "Hello, 我是 MingYou！"
                 };
-            },
-            methods: {
-                changeMessage() {
-                    this.message = "這是一個結合 Vue 3 的簡單網頁！";
-                }
             }
         }).mount("#app");
     </script>
