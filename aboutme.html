@@ -14,12 +14,31 @@
             padding: 10px;
             border-bottom: 1px solid #333;
         }
+        /* 導覽列文字基本設定 */
         .navbar a {
+            position: relative;
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             font-weight: bold;
-            transition: all 0.3s ease;
+        }
+
+        /* 建立一條隱藏的底線 */
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #007BFF;
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        /* 滑鼠移過去時，底線展開 */
+        .navbar a:hover::after {
+            width: 80%;
         }
         .navbar a:hover {
             color: #007BFF;
