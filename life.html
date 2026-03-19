@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>興趣與生活</title>
+    <style>
+        /* ===== 導覽列樣式 ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #2c2c2c;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        /* 導覽列文字基本設定 */
+        .navbar a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        /* 建立一條隱藏的底線 */
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #007BFF;
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+
+        /* 滑鼠移過去時，底線展開 */
+        .navbar a:hover::after {
+            width: 80%;
+        }
+        .navbar a:hover {
+            color: #007BFF;
+            border-radius: 5px;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar a {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+            }
+        }
+
+        /* ===== 網頁主體設定 ===== */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #dcdcdc;
+            color: #444;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        } 
+
+        .page-title {
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-title h1 {
+            margin: 0;
+            color: #333;
+            font-size: 2em;
+        }
+
+        /* ===== 圖文交錯區塊 ===== */
+        .story-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .story-block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-left: 4px solid #007BFF;
+            padding-left: 10px;
+        }
+
+        .story-text p {
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        .story-image {
+            flex: 1;
+        }
+
+        .story-image img {
+            width: 100%;
+            border-radius: 15px;
+            border: 3px solid #007BFF;
+            object-fit: cover;
+            aspect-ratio: 4 / 3; 
+            transition: transform 0.3s ease;
+        }
+        
+        /* 加個小動畫：滑鼠移到圖片上會微微放大 */
+        .story-image img:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            .story-block, .story-block:nth-child(even) {
+                flex-direction: column;
+                gap: 20px;
+                margin-bottom: 50px;
+            }
+            .story-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html">首頁</a>
+        <a href="aboutme.html">關於我</a>
+        <a href="life.html">興趣與生活</a>
+    </div>
+
+    <div class="container">
+        <div class="page-title">
+            <h1>OFFLINE MODE</h1>
+            <p></p>
+        </div>
+
+        <div class="story-block">
+            <div class="story-text">
+                <h2>📸</h2>
+                <p></p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800&auto=format&fit=crop" alt="相機與攝影">
+            </div>
+        </div>
+
+        <div class="story-block">
+            <div class="story-text">
+                <h2>🎵</h2>
+                <p></p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800&auto=format&fit=crop" alt="音樂與演唱會">
+            </div>
+        </div>
+
+        <div class="story-block">
+            <div class="story-text">
+                <h2>🎮</h2>
+                <p></p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="電競筆電與遊戲">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
