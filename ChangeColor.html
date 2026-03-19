@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景顏色自動切換練習</title>
+    <style>
+        body {
+            /* 讓顏色切換時有 0.5 秒的漸變過渡效果 */
+            transition: background-color 0.5s ease; 
+            /* 讓按鈕在畫面正中央 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        button:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="colorBtn">開始自動切換顏色 🎨</button>
+
+    <script>
+        let colors = ["#FF5733", "#33FF57", "#3357FF", "#F3FF33"];
+        let currentIndex = 0;
+
+        function changeBackgroundColor() {
+            document.body.style.backgroundColor = colors[currentIndex];
+            currentIndex = (currentIndex + 1) % colors.length;
+        }
+
+        // 點擊按鈕後執行顏色切換
+        document.getElementById("colorBtn").addEventListener("click", function () {
+            // 每 1.5 秒切換一次顏色
+            setInterval(changeBackgroundColor, 1500);
+        });
+    </script>
+</body>
+</html>
