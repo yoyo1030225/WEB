@@ -650,19 +650,37 @@
                 </div>
             </div>
 
-            <div class="video-row-wrapper reveal">
-                <div class="video-row-title">精選播放清單</div>
-                <div class="video-row">
-                    <a href="#" class="yt-card">
+            <div class="video-row-wrapper reveal" style="position: relative;">
+                
+                <h3 style="display: flex; align-items: center; gap: 10px;">
+                    🎞️ 精選播放清單
+                </h3>
+
+                <button class="scroll-btn left-btn hidden">❮</button>
+                
+                <div class="video-row playlist-row">
+                    <a href="https://www.youtube.com/playlist?list=PLNQllnK93luzSdgieZbJ-AfwtUAS7AdDm" target="_blank" class="yt-card">
                         <div class="yt-thumbnail">
-                            <img src="https://images.unsplash.com/photo-1621510427387-a2f07d2c372b?q=80&w=600&auto=format&fit=crop" alt="播放清單" class="no-drag">
+                            <img src="https://img.youtube.com/vi/WiRCBWOwNLU/maxresdefault.jpg" alt="播放清單">
+                            <div class="yt-duration">▶ 20 部影片</div>
                         </div>
                         <div class="yt-info">
-                            <div class="yt-title">歷代主打歌全集</div>
-                            <div class="yt-meta">全 15 部影片</div>
+                            <div class="yt-title">260307 DAY6 10th Anniversary Tour ＜The DECADE＞ in TAIPEI</div>
                         </div>
                     </a>
-                </div>
+                    <a href="https://www.youtube.com/playlist?list=PLNQllnK93luyjKQ9zayPnn11wlhRGsnAN" target="_blank" class="yt-card">
+                        <div class="yt-thumbnail">
+                            <img src="https://img.youtube.com/vi/ocV8RD3qXns/maxresdefault.jpg" alt="播放清單">
+                            <div class="yt-duration">▶ 22 部影片</div>
+                        </div>
+                        <div class="yt-info">
+                            <div class="yt-title">260228 tripleS Concert ＜My Secret New Zone＞ in Taipei</div>
+                        </div>
+                    </a>
+                    </div>
+
+                <button class="scroll-btn right-btn">❯</button>
+                
             </div>
         </div>
     </div>
@@ -688,48 +706,58 @@
         });
 
         
-        // ===== 點擊按鈕左右滑動 + 自動隱藏邊界按鈕 =====
+        // ===== 萬用版：點擊按鈕左右滑動 + 自動隱藏邊界按鈕 =====
             
-            const shortsRow = document.querySelector('.shorts-row');
-            const leftBtn = document.querySelector('.left-btn');
-            const rightBtn = document.querySelector('.right-btn');
-            const scrollAmount = 300; 
+            // 尋找畫面上所有的滑動區塊外層 (包含了 Shorts、播放清單...等)
+            const rowWrappers = document.querySelectorAll('.video-row-wrapper');
 
-            // 🌟 新增：檢查並更新按鈕狀態的函數
-            const updateButtonState = () => {
-                // 1. 檢查左邊界：如果捲軸位置小於等於 0，代表在最左邊
-                // (給 1px 的容錯空間，避免瀏覽器計算誤差)
-                if (shortsRow.scrollLeft <= 1) {
-                    leftBtn.classList.add('hidden'); // 隱藏左按鈕
-                } else {
-                    leftBtn.classList.remove('hidden'); // 顯示左按鈕
-                }
+            rowWrappers.forEach(wrapper => {
+                // 在每個區塊「內部」尋找它自己的滑動列和左右按鈕
+                const row = wrapper.querySelector('.video-row');
+                const leftBtn = wrapper.querySelector('.left-btn');
+                const rightBtn = wrapper.querySelector('.right-btn');
 
-                // 2. 檢查右邊界：目前捲動位置 + 螢幕上看到的寬度 >= 內容的總寬度
-                // (同樣給 1px 的容錯空間)
-                if (shortsRow.scrollLeft + shortsRow.clientWidth >= shortsRow.scrollWidth - 1) {
-                    rightBtn.classList.add('hidden'); // 隱藏右按鈕
-                } else {
-                    rightBtn.classList.remove('hidden'); // 顯示右按鈕
-                }
-            };
+                // 防呆機制：如果這個區塊沒有左右按鈕（例如它被改成自動換行網格了），就跳過不處理
+                if (!row || !leftBtn || !rightBtn) return;
 
-            // 綁定點擊事件 (往右滑)
-            rightBtn.addEventListener('click', () => {
-                shortsRow.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                const scrollAmount = 300; // 每次滑動的距離
+
+                // 專屬於這個區塊的狀態檢查函數
+                const updateButtonState = () => {
+                    // 檢查左邊界
+                    if (row.scrollLeft <= 1) {
+                        leftBtn.classList.add('hidden');
+                    } else {
+                        leftBtn.classList.remove('hidden');
+                    }
+
+                    // 檢查右邊界 (加入 Math.ceil 避免小數點計算誤差)
+                    if (Math.ceil(row.scrollLeft + row.clientWidth) >= row.scrollWidth) {
+                        rightBtn.classList.add('hidden');
+                    } else {
+                        rightBtn.classList.remove('hidden');
+                    }
+                };
+
+                // 綁定右按鈕
+                rightBtn.addEventListener('click', () => {
+                    row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+
+                // 綁定左按鈕
+                leftBtn.addEventListener('click', () => {
+                    row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+
+                // 只要發生滾動，就檢查按鈕狀態
+                row.addEventListener('scroll', updateButtonState);
+                
+                // 為了避免一開始圖片還沒載入導致寬度計算錯誤，稍微延遲 0.1 秒後執行第一次檢查
+                setTimeout(updateButtonState, 100);
+                
+                // 如果使用者改變了瀏覽器視窗大小，也重新檢查一次
+                window.addEventListener('resize', updateButtonState);
             });
-
-            // 綁定點擊事件 (往左滑)
-            leftBtn.addEventListener('click', () => {
-                shortsRow.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            });
-
-            // 🌟 新增：只要發生「滾動(scroll)」，就執行檢查函數
-            shortsRow.addEventListener('scroll', updateButtonState);
-
-            // 🌟 新增：網頁剛載入時，先執行一次檢查！
-            // (因為一開始一定在最左邊，所以左邊按鈕一開始就會被隱藏)
-            updateButtonState();
 
     </script>
 </body>
