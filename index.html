@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MingYou - 首頁</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        /* ===== 導覽列樣式 (與其他網頁統一) ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #2c2c2c;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .navbar a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: #007BFF;
+            border-radius: 5px;
+            transform: translateY(-2px);
+        }
+        /* 建立一條隱藏的底線 */
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #007BFF;
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+        /* 滑鼠移過去時，底線展開 */
+        .navbar a:hover::after {
+            width: 80%;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar a {
+                width: 100%;
+                text-align: center;
+                padding: 12px 0;
+            }
+        }
+
+        /* ===== 基本重置與背景設定 (與其他網頁統一) ===== */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #dcdcdc;
+            color: #444;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== 主要容器設定 ===== */
+        .container {
+            /* 加入這兩行，強制背景一開始就固定寬度，不會跟著字體伸縮 */
+            width: 90%; 
+            box-sizing: border-box; 
+            
+            max-width: 700px;
+            margin: auto; 
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px); 
+            padding: 60px 50px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(8, 7, 7, 0.1); 
+            animation: fadeIn 0.8s ease-out;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        } 
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            /* 固定最小高度，避免打字時下方內容跳動 */
+            min-height: 1.2em;
+        }
+
+        p {
+            font-size: 1.15em;
+            color: #555;
+            margin-bottom: 40px;
+            /* 固定最小高度，避免打字時下方內容跳動 */
+            min-height: 3.2em;
+        }
+
+        /* 游標閃爍動畫 */
+        .cursor {
+            font-weight: normal;
+            color: #555;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ===== 按鈕區塊與樣式 ===== */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+            flex-wrap: wrap; 
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 32px;
+            text-decoration: none;
+            border-radius: 50px; 
+            font-weight: bold;
+            font-size: 1.05em;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 狀態燈號的 CSS */
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dot-red {
+            background-color: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.5); 
+        }
+        .dot-gray {
+            background-color: #9ca3af;
+        }
+
+        /* 主按鈕 */
+        .btn-primary {
+            background-color: #1f2937;
+            color: #ffffff;
+            border: 2px solid #1f2937;
+            box-shadow: 0 4px 10px rgba(31, 41, 55, 0.15);
+        }
+        .btn-primary:hover {
+            background-color: #374151;
+            border-color: #374151;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(31, 41, 55, 0.2);
+        }
+
+        /* 次按鈕 */
+        .btn-secondary {
+            background-color: transparent;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        .btn-secondary:hover {
+            border-color: #9ca3af;
+            color: #1f2937;
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">首頁</a>
+        <a href="aboutme.html">關於我</a>
+        <a href="life.html">興趣與生活</a>
+    </div>
+
+    <div style="flex: 1; display: flex; align-items: center;">
+        <div id="app" class="container">
+            <h1>{{ greeting }}<span class="cursor" v-show="phase === 1">|</span></h1>
+            
+            <p>{{ desc }}<span class="cursor" v-show="phase >= 2">|</span></p>
+            
+            <div class="button-group">
+                <a href="aboutme.html" class="btn btn-primary">
+                    <span class="status-dot dot-red"></span> ONLINE
+                </a>
+                <a href="life.html" class="btn btn-secondary">
+                    <span class="status-dot dot-gray"></span> OFFLINE
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    fullGreeting: "Hello, 我是 MingYou.",
+                    fullDesc: "歡迎來到我的個人主頁，這裡記錄了我的專業與日常。",
+                    greeting: "",
+                    desc: "",
+                    phase: 1 
+                };
+            },
+            mounted() {
+                setTimeout(() => {
+                    this.typeGreeting(0);
+                }, 300);
+            },
+            methods: {
+                typeGreeting(i) {
+                    if (i < this.fullGreeting.length) {
+                        this.greeting += this.fullGreeting.charAt(i);
+                        setTimeout(() => this.typeGreeting(i + 1), 75);
+                    } else {
+                        this.phase = 2;
+                        setTimeout(() => this.typeDesc(0), 400);
+                    }
+                },
+                typeDesc(i) {
+                    if (i < this.fullDesc.length) {
+                        this.desc += this.fullDesc.charAt(i);
+                        setTimeout(() => this.typeDesc(i + 1), 50);
+                    } else {
+                        this.phase = 3;
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
